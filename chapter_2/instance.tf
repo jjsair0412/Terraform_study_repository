@@ -1,22 +1,22 @@
 resource "aws_instance" "example" {
-  ami = "${lookup(var.AMIS, var.AWS_REGION)}"
+  ami           = lookup(var.AMIS, var.AWS_REGION)
   instance_type = "t2.micro"
   # securityGroup IP 개수 초기화되어 ip range 지정안됨
   # security_groups = [aws_security_group.form_korea.name]
 
-  key_name = "${var.AWS_KEY_NAME}"
+  key_name = var.AWS_KEY_NAME
 
   // 프로비저닝되는 인스턴스 내부에 파일 업로드
   // 앤서블 스크립트 등을 업로드해서 , 소프트웨어 배포 자동화 가능
   provisioner "file" {
-    source = "script.sh"
+    source      = "script.sh"
     destination = "/tmp/script.sh"
-    
+
     connection {
-      type = "ssh"
-      user = "${var.instance_username}"
+      type        = "ssh"
+      user        = var.instance_username
       private_key = file("${var.AWS_KEY_PATH}")
-      host     = self.public_ip
+      host        = self.public_ip
     }
   }
 
@@ -28,10 +28,10 @@ resource "aws_instance" "example" {
       "sudo /tmp/script.sh",
     ]
     connection {
-      type = "ssh"
-      user = "${var.instance_username}"
+      type        = "ssh"
+      user        = var.instance_username
       private_key = file("${var.AWS_KEY_PATH}")
-      host     = self.public_ip
+      host        = self.public_ip
     }
   }
 
@@ -44,10 +44,10 @@ resource "aws_instance" "example" {
   }
 
   provisioner "local-exec" {
-    command = "echo ${self.public_ip} >> public_ips.txt"  
+    command = "echo ${self.public_ip} >> public_ips.txt"
   }
 }
 
 output "ip" {
-  value = "${aws_instance.example.public_ip}"
+  value = aws_instance.example.public_ip
 }
