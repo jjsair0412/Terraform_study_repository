@@ -4,6 +4,11 @@ provider "aws" {
   region     = "ap-northeast-2"
 }
 
+provider "cloudinit" {
+  
+}
+
+
 # network 모듈 생성
 module "network" {
   ## module path ##
@@ -36,4 +41,7 @@ module "instace" {
   MAIN_1_PUBLIC_SUBNET_ID  = module.network.MAIN_1_PUBLIC_SUBNET_ID
   MAIN_1_PRIVATE_SUBNET_ID = module.network.MAIN_1_PRIVATE_SUBNET_ID
 
+  VOLUME_AZ   = var.MAIN_1_REGION
+  VOLUME_SIZE = var.VOLUME_SIZE
+  MAIN_2_REGION = var.MAIN_2_REGION
 }

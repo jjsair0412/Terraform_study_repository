@@ -91,3 +91,9 @@ variable "INSTNACE_TYPE" {
   type        = string
   description = "test instance type"
 }
+
+variable "VOLUME_SIZE" {
+  type        = string
+  description = "aws volume size"
+
+}
