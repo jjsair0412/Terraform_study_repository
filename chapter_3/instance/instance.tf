@@ -19,7 +19,7 @@ resource "aws_instance" "was" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.INSTNACE_TYPE
   key_name      = var.AWS_KEY_NAME
-  user_data =  "${data.template_cloudinit_config.cloudinit-example.rendered}"
+  # user_data =  "${data.template_cloudinit_config.cloudinit-example.rendered}"
 
   subnet_id = var.MAIN_1_PUBLIC_SUBNET_ID
 

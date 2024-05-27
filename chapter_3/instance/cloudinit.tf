@@ -1,12 +1,12 @@
 data "template_file" "init-script" {
-    template = "${file("script/init.cfg")}"
+    template = "${file("${path.module}/script/init.cfg")}"
     vars = {
         REGION = var.MAIN_2_REGION
     }
 }
 
 data "template_file" "shell-script" {
-    template = "${file("script/volumes.sh")}"
+    template = "${file("${path.module}/script/volumes.sh")}"
     vars = {
         DEVICE = var.VOLUME_INSTANCE_DEVICE_NAME
     }
