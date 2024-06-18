@@ -1,4 +1,4 @@
-resource "aws_ssm_parameter" "myparameter2" {
+resource "aws_ssm_parameter" "myparameter" {
   name  = "/myapp/myparameter"
   type  = "String"
   value = "myvalue"
